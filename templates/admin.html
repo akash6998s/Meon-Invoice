@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>Tax Invoicing | Admin Login</title>
+    <meta
+      content="MEON is an artificial Intelligence based company delivering services like Chatbot, Virtual Assistant, AIM(Artificial Intelligence Marketing) that can solve."
+      name="description"
+    />
+    <meta
+      content="MEON is an artificial Intelligence based company delivering services like Chatbot, Virtual Assistant, AIM(Artificial Intelligence Marketing) that can solve."
+      name="keywords"
+    />
+
+    <!-- Favicons -->
+    <link href="/static/meon/img/favicon.png" rel="icon" />
+    <link href="/static/meon/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="/static/meon/vendor/animate.css/animate.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/meon/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/meon/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/meon/vendor/boxicons/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/meon/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="/static/meon/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- client carousel code  -->
+    <script
+      src="https://code.jquery.com/jquery-2.2.0.min.js"
+      type="text/javascript"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.js"></script>
+
+    <!-- ck Editor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+
+    <!-- Template Main CSS File -->
+    <link href="/static/meon/css/style.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script src="/static/meon/js/commonComponent.js"></script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-KTNMVTC");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <style>
+      /* * * * * General CSS * * * * */
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      .wrapper {
+        margin: 0 auto;
+        width: 100%;
+        max-width: 1020px;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .admin-container {
+        background: #ffffff;
+        position: relative;
+        width: 100%;
+        /* max-width: 750px; */
+        height: auto;
+        display: flex;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+          rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+          rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+      }
+
+      .col-left,
+      .col-right {
+        padding: 30px;
+        /* display: flex; */
+      }
+
+      .col-left {
+        width: 60%;
+        -webkit-clip-path: polygon(0 0, 0% 100%, 100% 0);
+        clip-path: polygon(0 0, 0% 100%, 100% 0);
+        background: #185cb6;
+      }
+
+      .col-right {
+        padding: 20px 30px 50px 30px;
+        width: 50%;
+        /* margin-left: -10%; */
+      }
+
+      @media (max-width: 575.98px) {
+        .admin-container {
+          flex-direction: column;
+          box-shadow: none;
+        }
+
+        .col-left,
+        .col-right {
+          width: 100%;
+          margin: 0;
+          -webkit-clip-path: none;
+          clip-path: none;
+        }
+
+        .col-right {
+          padding: 30px;
+        }
+      }
+
+      .login-text {
+        position: relative;
+        width: 100%;
+        color: #ffffff;
+      }
+
+      .login-text h2 {
+        margin: 0 0 15px 0;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .login-text h5 {
+        color: #ffffff;
+        font-weight: 500;
+      }
+
+      .login-text p {
+        margin: 0 0 20px 0;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 22px;
+      }
+
+      .login-text .btn {
+        display: inline-block;
+        padding: 7px 20px;
+        font-size: 16px;
+        letter-spacing: 1px;
+        text-decoration: none;
+        border-radius: 5px;
+        color: #ffffff;
+        outline: none;
+        border: 1px solid #ffffff;
+        box-shadow: inset 0 0 0 0 #ffffff;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+      }
+
+      .login-text .btn:hover {
+        color: #185cb6;
+        box-shadow: inset 150px 0 0 0 #ffffff;
+      }
+
+      .login-form {
+        position: relative;
+        width: 100%;
+        /* top: 3.5rem; */
+      }
+
+      @media (max-width: 600px) {
+        .login-form {
+          position: relative;
+          width: 100%;
+          /* top: 1rem; */
+        }
+      }
+
+      .login-form h2 {
+        margin: 0 0 15px 0;
+        font-size: 25px;
+        font-weight: 700;
+      }
+
+      .login-form p {
+        margin: 0 0 10px 0;
+        text-align: left;
+        color: #666666;
+        font-size: 15px;
+      }
+
+      .login-form p:last-child {
+        margin: 0;
+        padding-top: 3px;
+      }
+
+      .login-form p a {
+        color: #185cb6;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .login-form label {
+        display: block;
+        width: 100%;
+        margin-bottom: 2px;
+        letter-spacing: 0.5px;
+      }
+
+      .login-form p:last-child label {
+        width: 60%;
+        float: left;
+      }
+
+      .login-form label span {
+        color: #e2150b;
+        padding-left: 2px;
+      }
+
+      .login-form input {
+        display: block;
+        width: 100%;
+        height: 35px;
+        padding: 0 10px;
+        outline: none;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+      }
+
+      .login-form input:focus {
+        border-color: #185cb6;
+      }
+
+      .login-form button,
+      .login-form input[type="submit"] {
+        display: inline-block;
+        width: 100%;
+        margin-top: 5px;
+        padding: 10px 0;
+        color: #ffffff;
+        font-size: 16px;
+        letter-spacing: 1px;
+        cursor: pointer;
+        background: #185cb6;
+        border: 1px solid #185cb6;
+        border-radius: 5px;
+        box-shadow: inset 0 0 0 0 #185cb6;
+        transition: 0.3s;
+        -webkit-transition: 0.3s;
+        font-weight: 600;
+      }
+
+      .login-form button:hover,
+      .login-form input[type="submit"]:hover {
+        color: #185cb6;
+        background: #ffffff;
+        /* box:  #185cb6; */
+      }
+
+      ::placeholder {
+        color: #b6b4b4;
+        opacity: 1;
+        /* Firefox */
+      }
+
+      :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #b6b4b4;
+      }
+
+      ::-ms-input-placeholder {
+        /* Microsoft Edge */
+        color: #b6b4b4;
+      }
+
+      @media (max-width: 600px) {
+        /* .admin-container {
+          height: 90vh;
+        } */
+        .col-left {
+          display: none;
+        }
+      }
+
+      .errormsg {
+        color: red;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-KTNMVTC"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <section style="background-color: #cccccc">
+      <div class="container">
+        <div class="">
+          <div class="row">
+            <div class="col-12">
+              <div class="wrapper">
+                <div class="admin-container">
+                  <div class="col-left">
+                    <div class="login-text">
+                      <h2>Tax Invoicing - Login</h2>
+                      <!-- <a class="btn" href="" type="submit" id="submit">Log In</a> -->
+                    </div>
+                  </div>
+                  <div class="col-right">
+                 <a href="{{url_for('googleLogin')}}"> <button
+                      style="
+                        display: flex;
+                        margin-left: 20px;
+                        align-items: center;
+                        gap: 60px;
+                        padding: 10px 20px;
+                        background-color: white;
+                        box-shadow: 0 0 4px #ccc;
+                        border: none;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        margin-bottom: 20px;
+                        justify-content: space-between;
+                      "
+                      class="google_btn"
+                      onclick="googlesignin()"
+                    >
+                      <img
+                        width="30px"
+                        src="static/images/google.png"
+                        alt="google-icon"
+                      />
+                      <div
+                        style="
+                          width: 2px;
+                          height: 30px;
+                          background-color: #185cb7;
+                        "
+                        class="vertical"
+                      ></div>
+                      <span style="font-weight: 600; color: #185cb7"
+                        >Continue with Google</span
+                      >
+                    </button></a>
+                    <form
+                      action=""
+                      method="POST"
+                      id="main_div"
+                      class="admin-form"
+                    >
+                      <div class="login-form">
+                        <h2>Login</h2>
+                        <div>
+                          <p>
+                            <label>Username<span>*</span></label>
+                            <input
+                              type="text"
+                              name="username"
+                              id="loginid"
+                              placeholder="Please Enter Username"
+                            />
+                            <small class="errormsg" id="loginidErr"></small>
+                          </p>
+                          <p>
+                            <label>Password<span>*</span></label>
+                            <input
+                              type="password"
+                              name="password"
+                              id="password"
+                              placeholder="Password"
+                            />
+                            <small class="errormsg" id="passwordErr"></small>
+                          </p>
+                          <p>
+                            <!-- <input
+                              type="submit"
+                              value="Sing In"
+                              onclick="login()"
+                            /> -->
+                            <button type="submit" id="submit" class="btn">
+                              Login
+                            </button>
+                          </p>
+                          <div class="d-flex justify-content-between">
+                            <!-- <p>
+                              <a href="">Forget Password?</a>
+                            </p> -->
+                            <!-- <p>
+                              <a href="">Sign Up</a>
+                            </p> -->
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    {{data}}
+    <!-- Vendor JS Files -->
+    <script src="/static/meon/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/meon/vendor/glightbox/js/glightbox.min.js"></script>
+    <script src="/static/meon/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="/static/meon/vendor/swiper/swiper-bundle.min.js"></script>
+    <!-- Template Main JS File -->
+    <script src="/static/meon/js/main.js"></script>
+
+    <script>
+      // function defining for print error msg.
+      function printloginerror(elemntid, errormsg) {
+        document.getElementById(elemntid).innerHTML = errormsg;
+      }
+
+      $(document).ready(function () {
+        $("#submit").click(function () {
+          var username = document.getElementById("loginid").value;
+          var password = document.getElementById("password").value;
+
+          var loginidErr = (passwordErr = true);
+
+          // validation for login form
+          if (username == "") {
+            printloginerror("loginidErr", "Please Enter Login Id");
+          } else {
+            // console.log(loginid);
+            printloginerror("loginidErr", "");
+            loginidErr = false;
+          }
+
+          // validation for password
+          if (password == "") {
+            printloginerror("passwordErr", "Please Enter Password");
+          } else {
+            // console.log(password);
+            printloginerror("passwordErr", "");
+            passwordErr = false;
+          }
+
+          // Prevent the form from being submitted if there are any errors
+          if ((loginidErr || passwordErr) == true) {
+            return false;
+          } else {
+            $.ajax({
+              url: "/invoice-admin",
+              data: $("form").serialize(),
+              type: "POST",
+              success: function (response) {
+                console.log(response);
+              },
+              error: function (error) {
+                console.log(error);
+              },
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

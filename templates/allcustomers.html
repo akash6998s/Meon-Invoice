@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Form</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6331a5aa02.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .all-customers {
+        padding: 60px;
+      }
+
+      .all-customers h1 {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 80px;
+        font-weight: 600;
+      }
+
+      .customer-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      .customer-table th,
+      .customer-table td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .customer-table th {
+        background-color: #94c1ff;
+      }
+
+      .customer-table tbody tr:hover {
+        background-color: #f9f9f9;
+      }
+
+      .logout {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        background-color: #3774c9;
+        border: none;
+        color: white;
+        padding: 7px 15px;
+        font-weight: 600;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .logout:hover {
+        background-color: #116ded;
+        outline: none;
+      }
+
+      .all-customers-heading {
+        justify-content: center;
+        margin-bottom: 50px;
+        font-weight: 700;
+        font-size: 2rem;
+      }
+
+      input {
+        font-size: 16px; /* Set the desired font size */
+        user-scalable: 0; /* Prevent zooming */
+        max-width: 100%; /* Ensure the input doesn't exceed the viewport width */
+      }
+
+      input {
+        touch-action: none;
+      }
+
+      #search-input {
+        margin-bottom: 10px;
+        position: absolute;
+        right: 60px;
+        top: 150px;
+        width: 300px;
+        padding: 3px 10px;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .all-customers {
+          padding: 10px;
+          width: 98%;
+        }
+
+        .all-customers h1 {
+          text-align: center;
+          margin-top: 175px;
+          margin-bottom: 129px;
+          font-size: 4.5rem;
+          font-weight: 800;
+        }
+
+        #search-input {
+          margin-bottom: 10px;
+          position: absolute;
+          right: 40px;
+          top: 310px;
+          width: 432px;
+          font-size: 2rem;
+          padding: 10px;
+        }
+
+        .customer-table th {
+          background-color: #94c1ff;
+          font-size: 1.5rem;
+        }
+
+        .customer-table td {
+          padding: 12px 15px;
+          font-size: 1.3rem;
+          border-bottom: 1px solid #ddd;
+        }
+
+        [type="button"]:not(:disabled),
+        [type="reset"]:not(:disabled),
+        [type="submit"]:not(:disabled),
+        button:not(:disabled) {
+          cursor: pointer;
+          padding: 20px 40px;
+          font-size: 1.5rem;
+        }
+        .fa-arrow-left:before {
+          content: "\f060";
+          font-size: 3.2rem;
+        }
+        .fa-solid,
+        .fas {
+          margin-top: 39px;
+          font-weight: 900;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="logout-btn" href="{{url_for('logout')}}"
+      ><button class="logout">Logout</button></a
+    >
+    <a
+      style="position: absolute; left: 50px; top: 50px; color: black"
+      href="/invoice_form"
+      ><i class="fa-solid fa-arrow-left fa-xl"></i
+    ></a>
+    <div class="all-customers">
+      <h1 class="all-customers-heading">All Customers</h1>
+
+      <!-- Add search input -->
+      <input type="text" id="search-input" placeholder="Search..." />
+
+      <table class="customer-table">
+        <thead>
+          <tr>
+            <th>Sno.</th>
+            <th>Customers</th>
+            <th>GST Number</th>
+            <th>Address</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody id="customer-details" class="customer-details">
+          <!-- Table rows will be dynamically populated -->
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      $(document).ready(function () {
+        // Function to filter the table rows based on search input
+        $("#search-input").on("keyup", function () {
+          var value = $(this).val().toLowerCase();
+          $("#customer-details tr").filter(function () {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+          });
+        });
+
+        // AJAX request to retrieve customer data from the server
+        $.ajax({
+          crossOrigin: true,
+          type: "GET",
+          contentType: "application/json; charset=utf-8",
+          url: "/listdetails",
+          success: function (data) {
+            var items = "";
+            for (let i = 0; i < data["data"].length; i++) {
+              items +=
+                "<tr><td>" +
+                [i + 1] +
+                "</td><td>" +
+                data["data"][i]["customer_name"] +
+                "</td><td>" +
+                data["data"][i]["gst_no"] +
+                "</td><td>" +
+                data["data"][i]["invoice_company_address1"] +
+                " " +
+                data["data"][i]["invoice_company_address2"] +
+                " " +
+                data["data"][i]["invoice_company_address3"] +
+                " " +
+                data["data"][i]["invoice_company_address4"] +
+                "</td><td>" +
+                data["data"][i]["state"] +
+                "</td></tr>";
+            }
+            $("#customer-details").html(items); // Replace table content
+          },
+          error: function (data) {
+            alert("Error, please try again");
+          },
+          dataType: "json",
+        });
+      });
+    </script>
+  </body>
+</html>

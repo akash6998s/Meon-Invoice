@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6331a5aa02.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      /* Styling for the container */
+
+      body {
+        font-family: Arial, sans-serif;
+        /* background-color: #f4f4f4; */
+        /* margin: 0; */
+        margin-top: 250px;
+        padding: 20px;
+      }
+      .add-customer-form {
+        padding: 40px;
+        width: 100%;
+        box-shadow: 0 0 4px #ccc;
+        border-radius: 10px;
+        /* display: flex;
+        align-items: center; */
+      }
+
+      .hsn-container {
+        margin: 0 auto;
+        /* max-width: 500px; */
+        width: 60%;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        /* Centering the container horizontally and vertically */
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      /* Styling for the heading */
+      .hsn-heading {
+        color: #333;
+        text-align: center;
+        font-weight: 700;
+        margin: 100px 0;
+      }
+
+      /* Styling for the form */
+      .add-customer-form {
+        margin-top: 20px;
+      }
+
+      /* Styling for the form details */
+      .add-customer-details {
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+      }
+
+      /* Styling for the label */
+      label {
+        display: block;
+        font-weight: bold;
+        font-size: 1.5rem;
+        margin-bottom: 5px;
+        text-align: start;
+      }
+
+      /* Styling for the input field */
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .logout {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        background-color: #3774c9;
+        border: none;
+        color: white;
+        padding: 7px 15px;
+        font-weight: 600;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .logout:hover {
+        background-color: #116ded;
+        outline: none;
+      }
+
+      .hsn-back {
+        position: absolute;
+        left: 50px;
+        top: 50px;
+        color: black;
+      }
+
+      /* .hsn-heading {
+        justify-content: center;
+        margin: 100px;
+        font-weight: 700;
+        font-size: 2rem;
+      } */
+
+      @media only screen and (max-width: 1000px) {
+        .hsn-container {
+          margin: 0 auto;
+          /* max-width: 500px; */
+          width: 96%;
+          padding: 10px;
+          font-family: Arial, sans-serif;
+          /* Centering the container horizontally and vertically */
+          position: absolute;
+          /* top: 100px; */
+          /* bottom: 0; */
+          /* left: 0;
+          right: 0; */
+        }
+
+        label {
+          margin-bottom: 10px;
+        }
+
+        .hsn-back {
+          display: none;
+          left: 28px;
+          top: 43px;
+          color: black;
+        }
+      }
+
+      @media only screen and (max-width: 576px) {
+        .hsn-heading {
+          font-weight: 800;
+          font-size: 1.6rem;
+          margin-bottom: 45px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <a class="logout-btn" href="{{url_for('logout')}}"
+      ><button class="logout">Logout</button></a
+    >
+    <a class="hsn-back" href="/invoice_form"
+      ><i class="fa-solid fa-arrow-left fa-xl"></i
+    ></a>
+    <div class="hsn-container">
+      <div class="hsn page">
+        <h2 class="hsn-heading">ADD HSN</h2>
+        <div class="add-customer-form">
+          <div class="add-customer-details">
+            <div
+              style="
+                display: flex;
+                align-items: start;
+                flex-direction: column;
+                width: 100%;
+              "
+            >
+              <label for="addhsn">HSN</label>
+              <small id="exceed" style="display: none; color: red"
+                >HSN value must be between 4 and 8 digits</small
+              >
+              <input
+                id="addhsn"
+                type="text"
+                placeholder="Add HSN"
+              /><br /><br />
+            </div>
+            <button
+              type="submit"
+              onclick="hsnSubmit()"
+              class="hsn-submit btn"
+              style="
+                padding: 10px 30px;
+                background-color: #3774c9;
+                color: white;
+              "
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function hsnSubmit() {
+        var hsnValue = $("#addhsn").val();
+
+        if (hsnValue.length >= 4 && hsnValue.length <= 8) {
+          var formData = new FormData();
+          formData.append("hsn_no", hsnValue);
+
+          var formData = new FormData();
+          formData.append("hsn_no", $("#addhsn").val());
+          for (let [key, value] of formData) {
+            console.log(`${key}: ${value}`);
+          }
+
+          $.ajax({
+            crossOrigin: true,
+            url: "/addhsn",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+              console.log(data);
+              alert("data saved successfully");
+              // window.location.href = window.location.origin;
+              sessionStorage.removeItem("hsnValue");
+              window.location.href = "/invoice_form";
+            },
+            error: function (data) {
+              console.log("error");
+            },
+          });
+        } else {
+          $("#exceed").show();
+        }
+      }
+    </script>
+
+    <script>
+      // Function to handle input changes
+      function handleInputChange() {
+        var hsnValue = $("#addhsn").val();
+        sessionStorage.setItem("hsnValue", hsnValue);
+      }
+
+      // Function to retrieve the stored value and set it in the input field
+      function retrieveStoredValue() {
+        var storedValue = sessionStorage.getItem("hsnValue");
+        if (storedValue) {
+          $("#addhsn").val(storedValue);
+        }
+      }
+
+      $(document).ready(function () {
+        // Retrieve stored value on document ready
+        retrieveStoredValue();
+
+        // Bind the input change event to the input field
+        $("#addhsn").on("input", handleInputChange);
+      });
+    </script>
+  </body>
+</html>

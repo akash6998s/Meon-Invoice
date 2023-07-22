@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Form</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6331a5aa02.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+  body {
+    font-family: Arial, sans-serif;
+    /* background-color: #f4f4f4; */
+    margin: 0;
+    padding: 20px;
+    margin-top: 60px;
+  }
+
+  .add-customer-heading {
+    margin-bottom: 60px;
+    font-weight: 700;
+  }
+
+  .add-customer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .add-customer-form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 7px;
+  }
+
+  .add-customer-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .add-customer-details label {
+    width: 370px;
+    margin-right: 150px;
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .add-customer-details input {
+    width: 140%;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    padding: 12px 0;
+    text-align: start;
+    padding: 15px 20px;
+  }
+
+  input {
+        font-size: 16px; /* Set the desired font size */
+        user-scalable: 0; /* Prevent zooming */
+        max-width: 100%; /* Ensure the input doesn't exceed the viewport width */
+      }
+
+      input {
+        touch-action: none;
+      }
+
+  .state-input-container {
+    /* width: 10%; Updated width to 100% */
+    height: 30px;
+    font-size: 14px;
+    /* text-align: center; */
+    display: flex;
+    /* flex-direction: column; */
+    align-items: start;
+  }
+
+  .state-input-container select {
+    width: 35%; /* Updated width to 80% */
+    margin-bottom: 7px;
+    padding: 15px 20px;
+  }
+
+  .add-customer-btns {
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+    gap: 10px;
+  }
+
+  .add-customer-btns button {
+    padding: 10px 20px;
+  }
+
+
+  .logout {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        background-color: #3774c9;
+        border: none;
+        color: white;
+        padding: 7px 15px;
+        font-weight: 600;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .logout:hover {
+        background-color: #116ded;
+        outline: none;
+      }
+
+      .partition{
+        display: flex;
+         gap: 35px;
+         margin-bottom:30px
+      }
+
+  
+
+      #add_state{
+        margin-bottom: 7px;
+         padding: 10px 15px;
+         width: 290px;
+      }
+      .state-width{
+        width: 70%;
+      }
+
+      .add-gst-popup {
+        display: none;
+        color: red;
+        position: absolute;
+        right: 141px;
+        top: 170px;
+    }
+
+      .add-back{
+        position: absolute;
+         left: 50px;
+          top: 50px;
+         color: black
+      }
+
+      @media only screen and (max-width: 1000px) {
+
+
+        .add-customer-heading {
+          margin-bottom: 86px;
+          font-weight: 800;
+          font-size: 3.9rem;
+          text-align: center;
+          margin-top: 134px;
+      }
+
+      .add-customer-details {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        margin-bottom: 10px;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .add-gst-popup {
+      display: none;
+      color: red;
+      position: absolute;
+      left: 89px;
+      top: 750px;
+      font-size: 1.2rem;
+  }
+    .add-customer-details label {
+      width: 100%;
+      text-align: left;
+      font-weight: 700;
+      font-size: 2rem;
+      margin: 11px 0;
+  }
+
+  .add-customer-details input {
+    width: 100%;
+    /* padding: 46px 0; */
+    /* height: 61px; */
+    font-size: 14px;
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 12px 0;
+    text-align: start;
+    padding: 30px 20px;
+}
+
+.add-customer-btns button{
+border: 1px solid #3774c9;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: white;
+    padding: 18px 90px;
+    font-size: 1.9rem;
+}
+
+.add-customer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 87%;
+  margin: 0 auto;
+}
+
+.logout {
+  position: absolute;
+  right: 30px;
+  top: 20px;
+  background-color: #3774c9;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  padding: 19px 59px;
+  font-weight: 600;
+  border-radius: 3px;
+  outline: none;
+}
+
+.fa-arrow-left:before {
+  content: "\f060";
+  font-size: 3rem;
+}
+
+
+#add_state {
+  margin-bottom: 7px;
+  padding: 22px 15px;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+  .add-customer-details label {
+    width: 100%;
+    text-align: left;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+  #customer_form{
+    width: 100%;
+  }
+
+  .partition {
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+    margin-bottom: 30px;
+}
+
+      }
+
+</style>
+    
+  </head>
+
+  <body>
+    <a class="logout-btn" href="{{url_for('logout')}}"
+        ><button class="logout">Logout</button></a
+      >
+    <a
+    class="add-back"
+      href="/invoice_form"
+      ><i class="fa-solid fa-arrow-left fa-xl"></i
+    ></a>
+    <div class="add-customer-container">
+      <div class="add-customer">
+        <h2  class="add-customer-heading">Add New Customer</h2>
+        <div style="margin-bottom: 30px">
+          
+        </div>
+        <form id="customer_form" onsubmit="addSave(event)">
+          <div class="partition">
+          <div class="add-customer-form">
+            <div class="add-customer-details">
+              <label>Customer Name</label>
+              <input
+                id="add_customer_name"
+                type="text"
+                placeholder="Enter Customer Name"
+                required
+              />
+            </div>
+          </div>
+          <div class="add-customer-form">
+            <small
+            class="add-gst-popup"
+            id="gstexceed"
+            >GST number does not match</small
+          >
+            <div class="add-customer-details">
+              <label>GST Number</label>
+              <input
+              onkeyup="gstexceed()"
+                id="add_gst"
+                type="type"
+                placeholder="Enter GST Number"
+                required
+                />
+            </div>
+          </div></div>
+          <div class="partition">
+          <div class="add-customer-form">
+            <div class="add-customer-details">
+              <label>Address 1</label>
+              <input
+                id="add_address_1"
+                type="text"
+                placeholder="Enter Address 1"
+              />
+            </div>
+          </div>
+          <div class="add-customer-form">
+            <div class="add-customer-details">
+              <label>Address 2</label>
+              <input
+                id="add_address_2"
+                type="text"
+                placeholder="Enter Address 2"
+              />
+            </div>
+          </div></div>
+          <div class="partition">
+          <div class="add-customer-form">
+            <div class="add-customer-details">
+              <label>Address 3</label>
+              <input
+                id="add_address_3"
+                type="text"
+                placeholder="Enter Address 3"
+              />
+            </div>
+          </div>
+          <div class="add-customer-form">
+            <div class="add-customer-details">
+              <label>Address 4</label>
+              <input
+                id="add_address_4"
+                type="text"
+                placeholder="Enter Address 4"
+              />
+            </div>
+          </div></div>
+          <div class="partition">
+          <div class="add-customer-form">
+            <div class="state-width add-customer-details">
+              <label>State</label>
+              <div class="state-input-container add-customer-form">
+                <select
+                  id="add_state"
+                  name="tax_invoice_type"
+                  required
+                >
+                  <option value="" disabled selected>Select a type</option>
+                  <option value="Uttarpradesh">Uttarpradesh</option>
+                  <option value="others">others</option>
+                </select>
+              </div>
+            </div>
+          </div>
+           <div style="visibility: hidden;" class="add-customer-form">
+           <!-- <div class="add-customer-detail">
+              <label>State</label>
+              <div class="state-input-containe add-customer-form">
+                <select
+                  id="add_stadsdcte"
+                  class="add-cudssstomer-details"
+                  style="margin-bottom: 7px; padding: 10px 15px; display: none;"
+                  name="ddds"
+                  required
+                >
+                  <option value="" disabled selected>Select a type</option>
+                  <option value="Uttarpradesh">Uttarpradesh</option>
+                  <option value="others">others</option>
+                  <option value="Uttarpradesh">Uttarpradesh</option>
+                  <option value="others">others</option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+        </div>
+          <div class="add-customer-btns">
+            <button
+            type="button"
+            style="
+            border: 1px solid #3774c9;
+            font-weight: 500;
+            border-radius: 5px;
+            background-color: white;
+            padding: 10px 40px;
+          "
+              onclick="cancel()"
+              class="add-cancel-btn"
+            >
+              Reset
+            </button>
+            <button type="submit" class="add-save-btn btn" style="padding: 10px 50px; background-color: #3774c9; color: white;">
+              Save
+            </button>
+          </div>
+        </form>
+    
+    <script>
+      function gstexceed() {
+        var gstInput = $("#add_gst").val();
+
+        if (gstInput.length !== 15) {
+          $("#gstexceed").show();
+        } else {
+          $("#gstexceed").hide();
+        }
+      }
+
+      function addSave() {
+        var gstValue = $("#add_gst").val();
+
+        if (gstValue.length == 15) {
+          var formData = new FormData();
+          formData.append("customer_name", $("#add_customer_name").val());
+          formData.append("gstno", $("#add_gst").val());
+          formData.append("add1", $("#add_address_1").val());
+          formData.append("add2", $("#add_address_2").val());
+          formData.append("add3", $("#add_address_3").val());
+          formData.append("add4", $("#add_address_4").val());
+          formData.append("state", $("#add_state").val());
+          for (let [key, value] of formData) {
+            console.log(`${key}: ${value}`);
+          }
+          if (
+            $("#add_customer_name").val() == "" ||
+            $("#add_gst").val() == "" ||
+            $("#add_state").val() == ""
+          ) {
+            alert("Please fill all field");
+          } else {
+            $.ajax({
+              crossOrigin: true,
+              url: "/addcompany",
+              type: "POST",
+              data: formData,
+              contentType: false,
+              processData: false,
+              success: function (data) {
+                if (data["msg"] == "Customer Name Exists") {
+                  alert("Customer name already exists");
+                } else {
+                  alert("data saved successfully");
+                  console.log(data);
+                  sessionStorage.removeItem('formValues');
+                  // location.reload();
+                  
+                }
+              },
+              error: function (data) {
+                console.log(data);
+                alert('error')
+              },
+            });
+          }
+        } else {
+          $("#gstexceed").show();
+        }
+      }
+
+      function cancel() {
+        // window.location.href = window.location.origin;
+        // window.location.href = "/invoice_form";
+        sessionStorage.removeItem('formValues');
+        location.reload();
+      }
+    </script>
+
+<script>
+  // Function to store form values in session storage
+function storeFormValues() {
+  // Get all input and select elements within the form
+  const formInputs = document.querySelectorAll('#customer_form input, #customer_form select');
+
+  // Create an object to store the form values
+  const formValues = {};
+
+  // Iterate over each input and select element
+  formInputs.forEach(input => {
+    const { id, value } = input;
+    formValues[id] = value;
+  });
+
+  // Store the form values in session storage
+  sessionStorage.setItem('formValues', JSON.stringify(formValues));
+}
+
+// Function to load form values from session storage
+function loadFormValues() {
+  // Get the stored form values from session storage
+  const storedFormValues = sessionStorage.getItem('formValues');
+
+  if (storedFormValues) {
+    // Parse the stored form values into an object
+    const formValues = JSON.parse(storedFormValues);
+
+    // Set the form values for each input and select element
+    for (const id in formValues) {
+      const input = document.getElementById(id);
+      if (input) {
+        input.value = formValues[id];
+      }
+    }
+  }
+}
+
+// Add event listeners to input and select elements
+document.querySelectorAll('#customer_form input, #customer_form select').forEach(element => {
+  element.addEventListener('input', storeFormValues);
+});
+
+// Call the loadFormValues function to set the form values when the page loads
+loadFormValues();
+
+</script>
+
+  </body>
+</html>

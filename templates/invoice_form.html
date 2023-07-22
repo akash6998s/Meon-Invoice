@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Invoice Form</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+      rel="stylesheet"
+    />
+
+    <script src="path/to/jquery.js"></script>
+    <script src="path/to/select2.js"></script>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/6331a5aa02.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        margin-top: 50px;
+      }
+      .container {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .invoice-container {
+        gap: 50px;
+        justify-content: center;
+        display: flex;
+        width: 90%;
+        flex-direction: column;
+      }
+      .main {
+        display: flex;
+        /* background-color: aqua; */
+        align-items: start;
+        margin-bottom: 20px;
+        justify-content: space-between;
+      }
+
+      .invoice-container h1 {
+        font-size: 1.9rem;
+        font-weight: 700;
+      }
+      .main label {
+        text-align: end;
+        /* background-color: bisque; */
+        width: 20%;
+        font-weight: 600;
+        /* background-color: aqua; */
+      }
+      .main select {
+        text-align: start;
+        width: 75%;
+        padding: 7px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        color: #3e3a3acc;
+      }
+
+      .main .input_btn {
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        width: 75%;
+      }
+
+      .main .input_btn input {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        color: #3e3a3acc;
+      }
+
+      .main .input_btn select {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        color: #3e3a3acc;
+      }
+      input {
+        font-size: 16px; /* Set the desired font size */
+        user-scalable: 0; /* Prevent zooming */
+        max-width: 100%; /* Ensure the input doesn't exceed the viewport width */
+      }
+
+      input {
+        touch-action: none;
+      }
+
+      .main input {
+        text-align: start;
+        width: 75%;
+        padding: 7px 0;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 5px 10px;
+        color: #3e3a3acc;
+      }
+
+      .line {
+        width: 100%;
+        height: 1px;
+        background-color: #615f5fcc;
+        margin-bottom: 30px;
+      }
+
+      .hsn-btn button {
+        border-radius: 8px;
+        background: #3774c9;
+        margin-top: 10px;
+        box-shadow: 0px 4px 15px 0px rgba(86, 148, 235, 0.5);
+        /* width: 258px;
+              height: 75px; */
+        flex-shrink: 0;
+        color: white;
+        border: 2px solid white;
+        font-weight: 600;
+      }
+      .hsn-btn button:hover {
+        background-color: white;
+        border: 2px solid #3774c9;
+        color: #3774c9;
+      }
+
+      #submitBtn {
+        border-radius: 5px;
+        background: #3774c9;
+        padding: 8px 20px;
+        border: 2px solid white;
+        box-shadow: 0px 4px 15px 0px rgba(86, 148, 235, 0.5);
+        margin: 70px;
+        /* width: 258px;
+              height: 75px; */
+        flex-shrink: 0;
+        color: white;
+        font-weight: 600;
+      }
+
+      #submitBtn:hover {
+        background-color: white;
+        border: 2px solid #3774c9;
+        color: #3774c9;
+      }
+
+      .generate-btn,
+      .all-customers-btn {
+        border: 2px solid #3774c9;
+        padding: 10px 20px;
+        width: 240px;
+        color: #3774c9;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 20px;
+        background-color: white;
+        border-radius: 5px;
+      }
+
+      .edit-customer-btn,
+      .add-customer-btn {
+        border: 2px solid #3774c9;
+        padding: 10px 20px;
+        width: 240px;
+        color: #3774c9;
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-top: 20px;
+        background-color: white;
+        text-decoration: none;
+        border-radius: 5px;
+      }
+
+      .logout {
+        position: absolute;
+        right: 30px;
+        top: 20px;
+        background-color: #3774c9;
+        border: none;
+        color: white;
+        padding: 7px 15px;
+        font-weight: 600;
+        border-radius: 3px;
+        outline: none;
+      }
+
+      .logout:hover {
+        background-color: #116ded;
+        outline: none;
+      }
+
+      #additional-fields-container {
+        margin-top: 60px;
+      }
+
+      .add-field-btn {
+        border-radius: 8px;
+        background: #3774c9;
+        margin-top: 10px;
+        box-shadow: 0px 4px 15px 0px rgba(86, 148, 235, 0.5);
+        flex-shrink: 0;
+        color: white;
+        border: 2px solid white;
+        font-weight: 600;
+        font-size: 1.2rem;
+        display: flex;
+        margin-left: 76px;
+        margin-bottom: 38px;
+        margin-top: 28px;
+        padding: 0px 13px;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .invoice-container {
+          gap: 50px;
+          justify-content: center;
+          display: flex;
+          width: 130%;
+          flex-direction: column;
+        }
+
+        .main {
+          display: flex;
+          /* background-color: aqua; */
+          flex-direction: column;
+          align-items: start;
+          margin-bottom: 20px;
+          justify-content: space-between;
+        }
+
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__arrow {
+          height: 26px;
+          position: absolute;
+          top: 31px;
+          right: -124px;
+          width: 50px;
+        }
+
+        .main label {
+          text-align: start;
+          /* background-color: bisque; */
+          width: 100%;
+          font-weight: 600;
+          font-size: 2.7rem;
+          margin-top: 17px;
+          /* background-color: aqua; */
+        }
+
+        [type="button"]:not(:disabled),
+        [type="reset"]:not(:disabled),
+        [type="submit"]:not(:disabled),
+        button:not(:disabled) {
+          cursor: pointer;
+          padding: 16px 84px;
+          font-size: 2rem;
+        }
+
+        .main select {
+          text-align: start;
+          width: 100%;
+          padding: 10px 0;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 6px 10px;
+          font-size: 2rem;
+          color: #3e3a3acc;
+        }
+
+        .main .input_btn {
+          display: flex;
+          align-items: start;
+          flex-direction: column;
+          width: 100%;
+        }
+
+        .main .input_btn input {
+          width: 100%;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 7px 10px;
+          font-size: 2rem;
+          color: #3e3a3acc;
+        }
+
+        .main .input_btn select {
+          width: 100%;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 10px;
+          color: #3e3a3acc;
+        }
+
+        .main input {
+          text-align: start;
+          width: 100%;
+          border-radius: 5px;
+          border: 1px solid #ccc;
+          padding: 30px 10px;
+          font-size: 2rem;
+          color: #3e3a3acc;
+        }
+
+        #submitBtn {
+          border-radius: 15px;
+          font-size: 2.5rem;
+          padding: 23px 50px;
+          width: 278px;
+        }
+        .invoice-container h1 {
+          font-size: 5rem;
+          font-weight: 800;
+          margin-bottom: 30px;
+          margin-top: 85px;
+        }
+        .generate-btn,
+        .all-customers-btn {
+          border: 3px solid #3774c9;
+          padding: 10px 20px;
+          width: 322px;
+          color: #3774c9;
+          font-weight: 700;
+          font-size: 2rem;
+          margin-top: 41px;
+          background-color: white;
+          border-radius: 5px;
+        }
+        .edit-customer-btn,
+        .add-customer-btn {
+          border: 3px solid #3774c9;
+          padding: 10px 20px;
+          width: 420px;
+          color: #3774c9;
+          font-weight: 700;
+          font-size: 2rem;
+          margin-top: 88px;
+          background-color: white;
+          border-radius: 5px;
+        }
+
+        .select2-container--default .select2-selection--single {
+          background-color: #fff;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          width: 119%;
+          padding: 40px 13px;
+          font-size: 2rem;
+        }
+
+        .select2-container--default
+          .select2-search--dropdown
+          .select2-search__field {
+          border: 1px solid #aaa;
+          padding: 3px 16px;
+          font-size: 2rem;
+        }
+
+        .select2-results__option {
+          padding: 6px;
+          font-size: 1.7rem;
+          user-select: none;
+          -webkit-user-select: none;
+        }
+
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__arrow {
+          height: 26px;
+          position: absolute;
+          top: 32px;
+          right: 20px;
+          width: 20px;
+        }
+
+        .select2-container--default .select2-selection--single {
+          background-color: #fff;
+          border: 1px solid #aaa;
+          border-radius: 4px;
+          width: 100%;
+          padding: 40px 13px;
+          font-size: 2rem;
+        }
+
+        #terms,
+        #Rate_unit,
+        #quantity,
+        #item_description {
+          padding: 12px 20px;
+          font-size: 2rem;
+        }
+
+        .hsn-btn button {
+          border-radius: 8px;
+          background: #3774c9;
+          margin-top: 10px;
+          box-shadow: 0px 4px 15px 0px rgba(86, 148, 235, 0.5);
+          flex-shrink: 0;
+          color: white;
+          border: 2px solid white;
+          font-weight: 600;
+          font-size: 2rem;
+          margin-top: 28px;
+          padding: 17px 53px;
+        }
+
+        .add-field-btn {
+          border-radius: 8px;
+          background: #3774c9;
+          margin-top: 10px;
+          box-shadow: 0px 4px 15px 0px rgba(86, 148, 235, 0.5);
+          flex-shrink: 0;
+          color: white;
+          border: 2px solid white;
+          font-weight: 600;
+          font-size: 1.5rem;
+          display: flex;
+          margin-left: 0px;
+          margin-bottom: 38px;
+          margin-top: 28px;
+          padding: 4px 28px;
+        }
+
+        .select2-container--default
+          .select2-selection--single
+          .select2-selection__arrow {
+          height: 26px;
+          position: absolute;
+          top: 36px;
+          right: 22px;
+          width: 50px;
+        }
+
+        .all-customers-btn,
+        .generate-btn {
+          cursor: pointer;
+          padding: 16px 84px;
+          font-size: 2rem;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <a class="logout-btn" href="{{url_for('logout')}}"
+        ><button class="logout">Logout</button></a
+      >
+
+      <div class="invoice-container">
+        <h1>INVOICE FORM</h1>
+        <div>
+          <div class="flex">
+            <div class="main">
+              <label for="tax_invoice_type">Invoice Type</label>
+              <select name="tax_invoice_type" id="tax_invoice_type" required>
+                <option value disabled selected>Select a type</option>
+                <option value="Tax Invoice">TAX</option>
+                <option value="Proforma Invoice">PROFORMA</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex">
+            <div class="main">
+              <label for="company">Meon Companies</label>
+              <select name="company" id="company" required>
+                <option value disabled selected>
+                  Select Meon Company Name
+                </option>
+                <option value="Meon Technologies pvt Ltd">
+                  Meon Technologies pvt Ltd
+                </option>
+                <option value="Meon Enterprises">Meon Enterprises</option>
+                <option value="Meon Tours and Travels">
+                  Meon Tours and Travels
+                </option>
+                <option value="Meon Financial Consultants Pvt Ltd">
+                  Meon Financial Consultants Pvt Ltd
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="flex">
+            <div style="align-items: start" class="main">
+              <label for="invoice-gen">Invoice No</label>
+              <div class="input_btn">
+                <input id="invoice-gen" placeholder="Invoice Number" readonly />
+                <div>
+                  <a href="/listdetailslink"
+                    ><button
+                      class="all-customer all-customers-btn front-page-btn"
+                    >
+                      All Customer
+                    </button></a
+                  >
+                  <a href="/find_invoicelink"
+                    ><button class="prev-invoice generate-btn front-page-btn">
+                      Previous Invoice
+                    </button></a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex">
+            <div class="main customer-main">
+              <label for="invoice_company_name">Customer Name</label>
+              <div style="position: relative" class="input_btn">
+                <select id="myDropdown" name="customer_name"></select>
+                <div style="top: 20px; display: flex; gap: 5px">
+                  <a
+                    style="text-decoration: none"
+                    href="/addcompany"
+                    class="newpage-button add-customer-btn cust-manage front-page-btn"
+                  >
+                    Add New Customer
+                    <i class="fa-solid fa-plus fa-lg"></i>
+                  </a>
+
+                  <a
+                    style="text-decoration: none"
+                    href="/editcustomer"
+                    class="newpage-button cust-manage edit-customer-btn front-page-btn"
+                  >
+                    Edit Customer Details
+                    <i class="fa-solid fa-pen-to-square fa-lg"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <small id="not-found" style="display: none; color: red"
+            >Customer does not exist</small
+          >
+          <small id="found" style="display: none; color: green"
+            >Data fetch successfully</small
+          >
+
+          <button class="add-field-btn" onclick="addAdditionalFields()">
+            Add Fields
+          </button>
+          <div class="flex">
+            <div class="main">
+              <label for="item_description">Item Description</label>
+              <input
+                type="text"
+                name="item_description"
+                id="item_description"
+                placeholder="Enter Item Description"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="flex">
+            <div class="main">
+              <label for="quantity">Quantity</label>
+
+              <input
+                name="quantity"
+                onpaste="return false;"
+                oncopy="return false"
+                onkeypress="return (event.charCode > 48 && event.charCode < 58)"
+                oninput="validateInput(this)"
+                id="quantity"
+                value="1"
+                type="number"
+                placeholder="Only Digits Allowed"
+                required
+              />
+            </div>
+          </div>
+          <div class="flex">
+            <div class="main">
+              <label for="Rate_unit">Rate Unit</label>
+              <input
+                type="number"
+                name="Rate_unit"
+                id="Rate_unit"
+                placeholder="Enter Rate Unit"
+                required
+              />
+            </div>
+          </div>
+          <div class="flex">
+            <div class="main">
+              <label for="hsn_code">HSN Code</label>
+              <div class="input_btn">
+                <select name="tax_invoice_type" id="hsn_code" required>
+                  <option value>Select a type</option>
+                </select>
+
+                <div class="hsn-btn">
+                  <a href="/hsn"
+                    ><button class="hsn-submit btn">
+                      Add HSN <i class="fa-solid fa-plus"></i></button
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="additional-fields-container"></div>
+
+          <div class="flex">
+            <div class="main">
+              <label for="name">Terms Of Payments</label>
+              <input
+                oninput="validateTermsInput(this)"
+                type="text"
+                name="terms"
+                id="terms"
+                placeholder="Enter Terms Of Payment"
+              />
+            </div>
+          </div>
+          <div class="text-center">
+            <input
+              type="submit"
+              id="submitBtn"
+              value="Submit"
+              class="btn"
+              onclick="submit()"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function getdetail(a) {
+        $(".overlay-bg").show();
+        $.ajax({
+          crossOrigin: true,
+          url: "/gstin/" + a,
+          type: "GET",
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            $(".overlay-bg").hide();
+            console.log(response);
+            $("#invoice_company_address1").val(
+              response["invoice_company_address1"]
+            );
+            $("#invoice_company_address2").val(
+              response["invoice_company_address2"]
+            );
+            $("#invoice_company_address3").val(
+              response["invoice_company_address3"]
+            );
+            $("#invoice_company_address4").val(
+              response["invoice_company_address4"]
+            );
+            $("#invoice_company_name").val(response["invoice_company_name"]);
+          },
+          error: function (data) {
+            console.log(data);
+            $(".overlay-bg").hide();
+          },
+        });
+      }
+
+      function submit() {
+        var inv = sessionStorage.getItem("invoice");
+        var formData = new FormData();
+        formData.append("tax_invoice_type", $("#tax_invoice_type").val());
+        formData.append("company", $("#company").val());
+        formData.append("id", $("#myDropdown option:selected").val());
+
+        var itemDescription = $("#item_description").val();
+        var quantity = parseInt($("#quantity").val());
+        var rateUnit = $("#Rate_unit").val();
+        var hsnCode = $("#hsn_code").val();
+
+        var rateDistribution = [
+          {
+            item_description: itemDescription,
+            quantity: quantity,
+            Rate_unit: rateUnit,
+            hsn: hsnCode,
+          },
+        ];
+
+        // Get the additional fields
+        var additionalFields = $(".additional-field");
+        var rateDistribution1 = [];
+        additionalFields.each(function () {
+          var itemDescription = $(this)
+            .closest(".flex")
+            .find("input[name='item_description']")
+            .val();
+          var quantity = parseInt(
+            $(this).closest(".flex").find("input[name='quantity']").val()
+          );
+          var rateUnit = $(this)
+            .closest(".flex")
+            .find("input[name='rate_unit']")
+            .val();
+          var hsnCode = $(this)
+            .closest(".flex")
+            .find("select[name='hsn_code']")
+            .val();
+
+          var additionalField = {
+            item_description: itemDescription,
+            quantity: quantity,
+            Rate_unit: rateUnit,
+            hsn: hsnCode,
+          };
+
+          rateDistribution.push(additionalField);
+        });
+
+        formData.append("rate_distribution", JSON.stringify(rateDistribution));
+        formData.append("terms", $("#terms").val());
+        formData.append("company", $("#company").val());
+
+        if (
+          $("#tax_invoice_type").val() == "" ||
+          $("#company").val() == "" ||
+          $("#myDropdown option:selected").val() == "" ||
+          $("#item_description").val() == "" ||
+          $("#quantity").val() == "" ||
+          $("#Rate_unit").val() == "" ||
+          $("#hsn_code").val() == "" ||
+          $("#terms").val() == ""
+        ) {
+          alert("Please fill all fields");
+        } else {
+          $(".overlay-bg").show();
+          $.ajax({
+            crossOrigin: true,
+            url: "/submit_invoice/" + encodeURIComponent(inv),
+            type: "post",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (response) {
+              sessionStorage.removeItem("invoiceType");
+              sessionStorage.removeItem("company");
+              sessionStorage.removeItem("invoice");
+              console.log(response);
+              console.log(rateDistribution);
+              console.log(rateUnit);
+              console.log(Rate_unit);
+              $(".overlay-bg").hide();
+              if (response.status !== false) {
+                let URL = response.pdf;
+                if (!window.ActiveXObject) {
+                  var save = document.createElement("a");
+                  save.href = URL;
+                  save.target = "_blank";
+                  var filename = URL.substring(URL.lastIndexOf("/") + 1);
+                  save.download = filename;
+                  if (
+                    navigator.userAgent
+                      .toLowerCase()
+                      .match(/(ipad|iphone|safari)/) &&
+                    navigator.userAgent.search("Chrome") < 0
+                  ) {
+                    document.location = save.href;
+                    location.reload();
+                  } else {
+                    var evt = new MouseEvent("click", {
+                      view: window,
+                      bubbles: true,
+                      cancelable: false,
+                    });
+                    save.dispatchEvent(evt);
+                    (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                    location.reload();
+                  }
+                } else if (!!window.ActiveXObject && document.execCommand) {
+                  var _window = window.open(URL, "_blank");
+                  var filename = URL.substring(URL.lastIndexOf("/") + 1);
+                  _window.document.close();
+                  _window.document.execCommand("SaveAs", true, filename || URL);
+                  _window.close();
+                }
+              } else {
+                alert(response.message);
+              }
+            },
+            error: function (data) {
+              console.log(data);
+              $(".overlay-bg").hide();
+            },
+          });
+        }
+      }
+
+      tax_invoice_type.addEventListener("change", generateInvoiceNumber);
+      company.addEventListener("change", generateInvoiceNumber);
+
+      function generateInvoiceNumber() {
+        var invoiceType = $("#tax_invoice_type").val();
+        var company = $("#company").val();
+        var invoiceGen = $("#invoice-gen").val();
+
+        // Store the values in session storage
+        sessionStorage.setItem("invoiceType", invoiceType);
+        sessionStorage.setItem("company", company);
+
+        var formData = new FormData();
+        formData.append("tax_invoice_type", $("#tax_invoice_type").val());
+        formData.append("company", $("#company").val());
+        console.log($("#company").val());
+        console.log("function called", formData);
+        for (let [key, value] of formData) {
+          console.log(`${key}: ${value}`);
+        }
+
+        if (tax_invoice_type && company) {
+          console.log("inside if");
+          $.ajax({
+            url: "/fetch_invoice_no",
+            crossOrigin: true,
+            type: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+              sessionStorage.setItem("invoice", data["invoice_no"]);
+              console.log(data);
+              $("#invoice-gen").val(data["invoice_no"]);
+            },
+            error: function (data) {
+              // alert("error")
+            },
+          });
+        } else {
+          console.log("Please select both invoice type and company name.");
+        }
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        // Retrieve the values from session storage
+        var invoiceType = sessionStorage.getItem("invoiceType");
+        var company = sessionStorage.getItem("company");
+        var invoice = sessionStorage.getItem("invoice");
+
+        // sessionStorage.clear();
+
+        // Fill the input fields with the retrieved values
+        $("#tax_invoice_type").val(invoiceType);
+        $("#company").val(company);
+        $("#invoice-gen").val(invoice);
+      });
+    </script>
+
+    <script>
+      $.ajax({
+        crossOrigin: true,
+        url: "/displayhsn",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        success: function (data) {
+          console.log(data);
+
+          var hsn_code = document.getElementById("hsn_code");
+          for (let i = 0; i < data["msg"].length; i++) {
+            let option = document.createElement("option");
+            option.value = data["msg"][i][0];
+            option.text = data["msg"][i][0];
+            hsn_code.appendChild(option);
+            // option.value = [i]
+            // hsn-added.appendChild(option)
+          }
+        },
+        error: function (data) {
+          console.log(data);
+        },
+      });
+    </script>
+
+    <script>
+      function quantityPopup() {
+        $("#quantity-popup").show();
+      }
+
+      function ratePopup() {
+        $("#rate-popup").show();
+      }
+    </script>
+
+    <script>
+      $(document).ready(function () {
+        var dropdown = $("#myDropdown");
+
+        // Add static disabled option as the first option
+        var staticOption = $(
+          '<option value="" disabled selected>Select an option</option>'
+        );
+        dropdown.append(staticOption);
+
+        // Make AJAX request to retrieve customer names
+        $.ajax({
+          url: "/listcustomer",
+          type: "GET",
+          success: function (data) {
+            console.log(data);
+
+            // Populate dropdown with customer names
+            for (var i = 0; i < data.data.length; i++) {
+              var option = new Option(
+                data.data[i][1], // Use customer_name as the visible text
+                data.data[i][0] // Use id as the value
+              );
+              dropdown.append(option);
+              // console.log(data.data[i][0]);
+            }
+          },
+          error: function (data) {
+            console.log(data);
+          },
+        });
+
+        // Initialize Select2
+        dropdown.select2({
+          placeholder: "Search Customer...",
+          allowClear: true,
+        });
+
+        // Event listener for option selection
+        dropdown.on("change", function (e) {
+          dropdown.select2("close"); // Close the dropdown
+        });
+      });
+    </script>
+
+    <script>
+      function validateTermsInput(input) {
+        var regex = /^[a-zA-Z\s]+$/;
+        var value = input.value;
+
+        if (value !== "" && !regex.test(value)) {
+          // alert("Please enter only alphabets");
+          // Clear the input field
+          input.value = "";
+        }
+      }
+    </script>
+
+    <script>
+      function validateInput(input) {
+        var regex = /^[0-9]+$/;
+        var value = input.value;
+
+        if (value !== "" && !regex.test(value)) {
+          //alert("Please enter digits only");
+          // Clear the input field
+          input.value = "";
+        }
+      }
+    </script>
+
+    <script>
+      let num = 0;
+      function addAdditionalFields() {
+        num = num + 1;
+        var container = document.getElementById("additional-fields-container");
+
+        // Create the HTML elements for the additional fields
+        var itemDiv = document.createElement("div");
+        itemDiv.classList.add("flex");
+        itemDiv.innerHTML = `
+        <div class="additional-field">
+      <div style="margin-top: 60px" class="main">
+        <label for="item_description">Item Description</label>
+        <input type="text" name="item_description" id="item_description_${num}"  placeholder="Enter Item Description" required />
+      </div>
+      <div class="main">
+        <label for="quantity">Quantity</label>
+        <input oninput="validateInput(this)" onpaste="return false;"
+        oncopy="return false"
+        onkeypress="return (event.charCode > 48 && event.charCode < 58)" value="1" type="number" id="quantity_${num}" name="quantity" placeholder="Enter Quantity" required />
+      </div>
+      <div class="main">
+        <label for="rate_unit">Rate Unit</label>
+        <input type="number" name="rate_unit" id="Rate_unit_${num}"  placeholder="Enter Rate Unit" required />
+      </div>
+      <div class="main">
+        <label for="hsn_code">HSN Code</label>
+        <select name="hsn_code" id="hsn_code_${num}"  required>
+          ${$(
+            "#hsn_code"
+          ).html()} <!-- Clone the options from the first HSN code dropdown -->
+        </select>
+      </div>
+    </div>
+    `;
+
+        // Append the additional fields to the container
+        container.appendChild(itemDiv);
+      }
+    </script>
+
+    <script src="path/to/jquery.js"></script>
+    <script src="path/to/select2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  </body>
+</html>

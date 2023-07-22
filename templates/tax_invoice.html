@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Invoice Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+
+
+        .overlay-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #000;
+            opacity: 0.7;
+            z-index: 9999;
+            text-align: center;
+            color: #fff;
+        }
+
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 5px solid #475927;
+            width: 60px;
+            height: 60px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 1s linear infinite;
+            margin: auto;
+            margin-top: 17em;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="justify-content: center; display: flex;">Invoice Form</h1>
+    <!-- PERFORMA INVOICES -->
+    <div style="display: flex; gap: 100px; margin-top: 50px;">
+        <div>
+            <label for="name">Invoice Type</label>
+            <select name="tax_invoice_type" id="tax_invoice_type" required>
+                <option value="" disabled selected>Select a type</option>
+                <option value="Tax">TAX</option>
+                <option value="Proforma">PROFORMA </option>
+            </select>
+        </div>
+        <div>
+            <label for="name">Company Name:</label>
+            <select name="company" id="company" required>
+                <option value="" disabled selected>Select a company</option>
+                <option value="Meontech">Meon Tech</option>
+                <option value="MeonEnterprise">Meon Enterprise </option>
+                <option value="Meontours">Meon Tours</option>
+                <option value="MeonFinancial">Meon Financial</option>
+            </select>
+        </div>
+    </div>
+    <hr>
+    <br>
+
+    <div style="display: flex; gap: 10px; align-items: center; gap: 30px;" class="buttons">
+        <input style="margin-right: 40px; padding: 0 10px;" id="invoice-gen" placeholder="Invoice Number" readonly>Invoice
+        Number</input>        
+        <button style="padding: 10px 30px;" class="minus" onclick="InvoiceInput('minus')">-</button>
+        <input style="width: 50px; margin-top: 14px;" type="text" id="valueInput" value="0" readonly>
+        <button style="padding: 10px 30px;" class="plus" onclick="InvoiceInput('plus')">+</button>
+    </div>
+
+    <br>
+    <hr>
+    <label for="name">State:</label>
+    <select name="state" id="state" required>
+        <option value="" disabled selected>Select a state</option>
+        <option value="uttarpradesh">Uttar Pradesh</option>
+        <option value="other">Other </option>
+    </select>
+    <hr>
+    <br>
+    <label for="name">Invoice Company Name</label>
+    <input type="text" name="invoice_company_name" id="invoice_company_name" placeholder="Enter Company Name" required>
+    <br>
+    <label for="name">Item Description</label>
+    <input type="text" name="item_description" id="item_description" placeholder="Enter Item Description" required>
+    <br>
+    <label for="name">Address 1</label>
+    <input type="text" name="invoice_company_address1" id="invoice_company_address1" placeholder="Enter Company Name"
+        required>
+    <br>
+    <label for="name">Address 2</label>
+    <input type="text" name="invoice_company_address2" id="invoice_company_address2"
+        placeholder="Enter Floor/ Building/ Unit No" required>
+    <br>
+    <label for="name">Address 3</label>
+    <input type="text" name="invoice_company_address3" id="invoice_company_address3" placeholder="Enter Block/ City"
+        required>
+    <br>
+    <label for="name">Address 4</label>
+    <input type="text" name="invoice_company_address4" id="invoice_company_address4" placeholder="Enter Other Details"
+        required>
+    <br>
+    <label for="name">Quantity</label>
+    <input type="text" name="quantity" id="quantity" placeholder="Enter Quantity (Only digit acceptable)" required>
+    <br>
+    <label for="name">Rate Unit</label>
+    <input type="text" name="Rate_unit" id="Rate_unit" placeholder="Enter Rate Unit (Only digit acceptable)" required>
+    <br>
+    <input type="submit" id="submitBtn" value="Submit" onclick="submit()" />
+
+    <div class="overlay-bg">
+        <div class="loader"></div>
+        <p>Please wait don't refresh it......</p>
+    </div>
+    <script>
+
+        function submit() {
+            var formData = new FormData();
+            formData.append("tax_invoice_type", $("#tax_invoice_type").val());
+            formData.append("company", $("#company").val());
+            formData.append("state", $("#state").val());
+            formData.append("invoice_company_name", $("#invoice_company_name").val());
+            formData.append("item_description", $("#item_description").val());
+            formData.append("invoice_company_address1", $("#invoice_company_address1").val());
+            formData.append("invoice_company_address2", $("#invoice_company_address2").val());
+            formData.append("invoice_company_address3", $("#invoice_company_address3").val());
+            formData.append("invoice_company_address4", $("#invoice_company_address4").val());
+            formData.append("quantity", $("#quantity").val());
+            formData.append("Rate_unit", $("#Rate_unit").val());
+            if ($("#tax_invoice_type").val() == '' || $("#company").val() == '' || $("#state").val() == '' || $("#invoice_company_name").val() == '' || $("#item_description").val() == '' || $("#invoice_company_address1").val() == '' || $("#invoice_company_address2").val() == '' || $("#invoice_company_address3").val() == '' || $("#invoice_company_address4").val() == '' || $("#quantity").val() == '' || $("#Rate_unit").val() == '') {
+                alert("Please fill all field")
+            }
+            else {
+                $(".overlay-bg").show();
+                $.ajax({
+                    crossOrigin: true,
+                    url: `/submit_invoice`,
+                    type: "post",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $(".overlay-bg").hide();
+                        let URL = response['pdf'];
+                        if (!window.ActiveXObject) {
+                            var save = document.createElement('a');
+                            save.href = URL;
+                            save.target = '_blank';
+                            var filename = URL.substring(URL.lastIndexOf('/') + 1);
+                            save.download = filename;
+                            if (navigator.userAgent.toLowerCase().match(/(ipad|iphone|safari)/) && navigator.userAgent.search("Chrome") < 0) {
+                                document.location = save.href;
+                            }
+                            else {
+                                var evt = new MouseEvent('click', {
+                                    'view': window,
+                                    'bubbles': true,
+                                    'cancelable': false
+                                });
+                                save.dispatchEvent(evt);
+                                (window.URL || window.webkitURL).revokeObjectURL(save.href);
+                            }
+                        }
+                        else if (!!window.ActiveXObject && document.execCommand) {
+                            var _window = window.open(URL, '_blank');
+                            var filename = URL.substring(URL.lastIndexOf('/') + 1);
+                            _window.document.close();
+                            _window.document.execCommand('SaveAs', true, filename || URL)
+                            _window.close();
+                        }
+                    },
+                    error: function (data) {
+                        console.log(data)
+                        $(".overlay-bg").hide();
+                    },
+                });
+            }
+        }
+
+        function InvoiceInput(a) {
+            if(a=='plus')
+            {
+                var plusvalue='plus';
+                var minusvalue="";
+            }
+            else
+            {
+                var plusvalue="";
+                var minusvalue='minus';
+            }
+            var formData = new FormData();
+            formData.append("tax_invoice_type", $("#tax_invoice_type").val());
+            formData.append("company", $("#company").val());
+            formData.append("plus", plusvalue);
+            formData.append("minus", minusvalue);
+            if ($("#tax_invoice_type").val() == '' || $("#company").val() == '' ) {
+                alert("Please select Invoice type and company Name")
+            }
+            else {
+                $(".overlay-bg").show();
+                $.ajax({
+                    crossOrigin: true,
+                    url: `/fetch_invoice_no`,
+                    type: "post",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function (response) {
+                        $(".overlay-bg").hide();
+                        console.log(response)
+                        $('#invoice-gen').val(response['invoice_no'])
+                    },
+                    error: function (data) {
+                        console.log(data)
+                        $(".overlay-bg").hide();
+                    },
+                });
+            }
+        }
+    </script>
+
+    <script>
+        const minusButton = document.querySelector('.minus');
+        const plusButton = document.querySelector('.plus');
+        const valueInput = document.getElementById('valueInput');
+
+        minusButton.addEventListener('click', function () {
+            let currentValue = parseInt(valueInput.value);
+            currentValue -= 1
+            valueInput.value = currentValue;
+        });
+
+        plusButton.addEventListener('click', function () {
+            let currentValue = parseInt(valueInput.value);
+            currentValue += 1;
+            valueInput.value = currentValue;
+        });
+        alert('fffff')
+    </script>
+
+
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .login-page {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 150px;
+      }
+      .google-login {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        box-shadow: 0 0 4px #ccc;
+        padding: 5px 10px;
+        border-radius: 10px;
+        text-decoration: none;
+      }
+      .google-logo {
+        width: 40px;
+      }
+      .side-img img {
+        width: 80%;
+      }
+
+      #invalid-user {
+        display: none;
+        position: absolute;
+        bottom: -30px;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        color: red;
+      }
+
+      .logo {
+        width: 50%;
+      }
+
+      @media only screen and (max-width: 1000px) {
+        .login-page {
+          display: flex;
+          flex-direction: column;
+          gap: 70px;
+          align-items: center;
+          justify-content: space-around;
+          margin-top: 150px;
+        }
+        .side-img img {
+          width: 100%;
+        }
+        .login-text {
+          font-size: 0.8rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-page">
+      <div class="side-img">
+        <img src="static/img/sideimage.png" alt="sideimage" />
+      </div>
+      <div
+        style="
+          display: flex;
+          position: relative;
+          gap: 10px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+        class="right-side"
+      >
+        <img class="logo" src="static/img/logo.png" alt="logo" />
+        <a href="{{url_for('googleLogin')}}" class="google-login">
+          <img
+            class="google-logo"
+            src="static/img/google.png"
+            alt="google-logo"
+          />
+          <div class="verticle">|</div>
+          <div class="login-text">Continue with Google</div>
+        </a>
+        <small id="invalid-user">Invalid User!</small>
+      </div>
+    </div>
+
+    <!-- <script>
+      var link = window.location.href.split("/");
+      if (link == "https://invoice.meon.co.in/?success=no") {
+        alert("invalid user");
+        console.log(link);
+      }
+    </script> -->
+    <!-- <script>
+      var link = "https://invoice.meon.co.in/?success=no";
+      var url = new URL(link);
+      var keyword = url.searchParams.get("success");
+
+      console.log(keyword); // Outputs "no"
+
+    </script> -->
+    <script>
+      var url = new URL(window.location.href);
+      var keyword = url.searchParams.get("success");
+
+      if (keyword === "no") {
+        // alert("Invalid user");
+        document.getElementById("invalid-user").style.display = "block";
+      }
+    </script>
+  </body>
+</html>
